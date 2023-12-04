@@ -1,1 +1,1 @@
-# pr-cticaPatronDeDise-o
+-se hace la práctica de "Patrones de diseño" del bootcamp de KeepCoding bajo el patrón de diseño MVVM
