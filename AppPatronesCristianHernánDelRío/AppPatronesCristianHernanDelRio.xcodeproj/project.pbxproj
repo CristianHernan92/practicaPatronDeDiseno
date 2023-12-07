@@ -45,7 +45,7 @@
 		F140A9172B2167C3002073A6 /* TransformationsTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformationsTableViewModel.swift; sourceTree = "<group>"; };
 		F140A9192B217AA4002073A6 /* TransformationDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformationDetail.swift; sourceTree = "<group>"; };
 		F140A91B2B217EF4002073A6 /* TransformationDetailTableModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformationDetailTableModelView.swift; sourceTree = "<group>"; };
-		F16870F92AD633A40032BB4B /* AppPatronesCristianHernánDelRío.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AppPatronesCristianHernánDelRío.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F16870F92AD633A40032BB4B /* AppPatronesCristianHernanDelRio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppPatronesCristianHernanDelRio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F16870FC2AD633A40032BB4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F16870FE2AD633A40032BB4B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F16871052AD633A60032BB4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -86,7 +86,7 @@
 		F16870F02AD633A40032BB4B = {
 			isa = PBXGroup;
 			children = (
-				F16870FB2AD633A40032BB4B /* AppPatronesCristianHernánDelRío */,
+				F16870FB2AD633A40032BB4B /* AppPatronesCristianHernanDelRio */,
 				F16870FA2AD633A40032BB4B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -94,12 +94,12 @@
 		F16870FA2AD633A40032BB4B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F16870F92AD633A40032BB4B /* AppPatronesCristianHernánDelRío.app */,
+				F16870F92AD633A40032BB4B /* AppPatronesCristianHernanDelRio.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F16870FB2AD633A40032BB4B /* AppPatronesCristianHernánDelRío */ = {
+		F16870FB2AD633A40032BB4B /* AppPatronesCristianHernanDelRio */ = {
 			isa = PBXGroup;
 			children = (
 				F19DEBCC2B1CF142008367CE /* UI */,
@@ -109,7 +109,7 @@
 				F19DEBCA2B1CF0F4008367CE /* Resources */,
 				F168710A2AD633A60032BB4B /* Info.plist */,
 			);
-			path = "AppPatronesCristianHernánDelRío";
+			path = AppPatronesCristianHernanDelRio;
 			sourceTree = "<group>";
 		};
 		F16871162AD634650032BB4B /* Models */ = {
@@ -339,9 +339,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F16870F82AD633A40032BB4B /* AppPatronesCristianHernánDelRío */ = {
+		F16870F82AD633A40032BB4B /* AppPatronesCristianHernanDelRio */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F168710D2AD633A60032BB4B /* Build configuration list for PBXNativeTarget "AppPatronesCristianHernánDelRío" */;
+			buildConfigurationList = F168710D2AD633A60032BB4B /* Build configuration list for PBXNativeTarget "AppPatronesCristianHernanDelRio" */;
 			buildPhases = (
 				F16870F52AD633A40032BB4B /* Sources */,
 				F16870F62AD633A40032BB4B /* Frameworks */,
@@ -351,9 +351,9 @@
 			);
 			dependencies = (
 			);
-			name = "AppPatronesCristianHernánDelRío";
+			name = AppPatronesCristianHernanDelRio;
 			productName = DragonBallZ;
-			productReference = F16870F92AD633A40032BB4B /* AppPatronesCristianHernánDelRío.app */;
+			productReference = F16870F92AD633A40032BB4B /* AppPatronesCristianHernanDelRio.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -372,7 +372,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F16870F42AD633A40032BB4B /* Build configuration list for PBXProject "AppPatronesCristianHernánDelRío" */;
+			buildConfigurationList = F16870F42AD633A40032BB4B /* Build configuration list for PBXProject "AppPatronesCristianHernanDelRio" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -385,7 +385,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F16870F82AD633A40032BB4B /* AppPatronesCristianHernánDelRío */,
+				F16870F82AD633A40032BB4B /* AppPatronesCristianHernanDelRio */,
 			);
 		};
 /* End PBXProject section */
@@ -579,7 +579,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2V6HX2J9BY;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "AppPatronesCristianHernánDelRío/Info.plist";
+				INFOPLIST_FILE = AppPatronesCristianHernanDelRio/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -608,7 +608,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2V6HX2J9BY;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "AppPatronesCristianHernánDelRío/Info.plist";
+				INFOPLIST_FILE = AppPatronesCristianHernanDelRio/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -631,7 +631,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F16870F42AD633A40032BB4B /* Build configuration list for PBXProject "AppPatronesCristianHernánDelRío" */ = {
+		F16870F42AD633A40032BB4B /* Build configuration list for PBXProject "AppPatronesCristianHernanDelRio" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F168710B2AD633A60032BB4B /* Debug */,
@@ -640,7 +640,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F168710D2AD633A60032BB4B /* Build configuration list for PBXNativeTarget "AppPatronesCristianHernánDelRío" */ = {
+		F168710D2AD633A60032BB4B /* Build configuration list for PBXNativeTarget "AppPatronesCristianHernanDelRio" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F168710E2AD633A60032BB4B /* Debug */,
