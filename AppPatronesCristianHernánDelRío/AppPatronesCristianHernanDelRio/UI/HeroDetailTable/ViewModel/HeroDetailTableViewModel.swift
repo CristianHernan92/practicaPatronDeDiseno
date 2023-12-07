@@ -21,8 +21,9 @@ final class HeroDetailTableViewModel{
 //EXTENSION
 extension HeroDetailTableViewModel:HeroDetailTableViewModelProtocol{
     func onViewLoaded() {
-        //creo un "DispatchGrpup" para hacer que se espere a que finalice las tarea asincrónica
+        //creo un "DispatchGrpup" para hacer que se espere a que termine el foreach con sus tareas asincrónicas antes de ejecutarse el "DispatchQueue.main.async"
         let group = DispatchGroup()
+        group.enter()
         DragonBallZNetworkModel.getTransformationsList(heroId: self.data.id) { [weak self] data in
             defer{
                 group.leave()

@@ -44,11 +44,16 @@ final class HeroDetailTable: UITableViewController {
             cell.titleOfCell.text = data.name
             cell.descriptionOfCell.text = data.description
             cell.imageOfCell.image = data.image
-            
             if (self.viewModel?.getTransformationsList() == []){
-                cell.transformationsButton.isHidden = true
-                cell.transformationsButton.isEnabled = false
+                if(!cell.transformationsButton.isHidden){
+                    cell.transformationsButton.isHidden = true
+                    cell.transformationsButton.isEnabled = false
+                }
             }else{
+                if(cell.transformationsButton.isHidden){
+                    cell.transformationsButton.isHidden = false
+                    cell.transformationsButton.isEnabled = true
+                }
                 //agregamos la función para el evento "touchUpInside" del botón "transformationsButton" de la celda
                 cell.transformationsButton.addTarget(
                                 self,
@@ -72,7 +77,12 @@ final class HeroDetailTable: UITableViewController {
     }
     
     @objc private func transformationsButtonTapped(_ sender: UIButton) {
-        self.navigationController?.showTransformationTable(with: self.viewModel?.getTransformationsList() ?? [])
+        if let viewModel = self.viewModel{
+            DispatchQueue.main.async {
+                self.navigationController?.showTransformationTable(with: viewModel.getTransformationsList())
+            }
+        }
+        
     }
 }
 
