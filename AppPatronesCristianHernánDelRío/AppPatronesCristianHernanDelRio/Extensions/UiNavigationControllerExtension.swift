@@ -1,11 +1,19 @@
 import UIKit
 
 extension UINavigationController{
+    func showLogin(){
+        DispatchQueue.main.async {
+            let loginViewController = Login()
+            loginViewController.viewModel = LoginViewModel(viewController: loginViewController)
+            self.pushViewController(
+                loginViewController,
+                animated: true)
+        }
+    }
     func showHeroTable(){
         DispatchQueue.main.async {
             let heroesTable = HeroesTable()
-            let heroesTableViewModel = HeroesTableViewModel(viewController: heroesTable)
-            heroesTable.viewModel = heroesTableViewModel
+            heroesTable.viewModel = HeroesTableViewModel(viewController: heroesTable)
             self.pushViewController(
                 heroesTable,
                 animated: true)
@@ -13,8 +21,7 @@ extension UINavigationController{
     }
     func showHeroDetailTable(with data: HeroDetail){
         let heroDetailTable = HeroDetailTable()
-        let heroDetailTableViewModel = HeroDetailTableViewModel(viewController: heroDetailTable,data: data)
-        heroDetailTable.viewModel = heroDetailTableViewModel
+        heroDetailTable.viewModel = HeroDetailTableViewModel(viewController: heroDetailTable,data: data)
         DispatchQueue.main.async {
             self.pushViewController(
                 heroDetailTable,
@@ -23,8 +30,7 @@ extension UINavigationController{
     }
     func showTransformationTable(with data: [HeroTransformation]){
         let transformationsTable = TransformationsTable()
-        let transformationsTableViewModel = TransformationsTableViewModel(viewController: transformationsTable, data: data)
-        transformationsTable.viewModel = transformationsTableViewModel
+        transformationsTable.viewModel = TransformationsTableViewModel(viewController: transformationsTable, data: data)
         DispatchQueue.main.async {
             self.pushViewController(
                 transformationsTable,
@@ -33,8 +39,7 @@ extension UINavigationController{
     }
     func showTransformationDetailTable(with data: TransformationDetail){
         let transformationDetailTable = TransformationDetailTable()
-        let heroDetailTableViewModel = TransformationDetailTableViewModel(viewController: transformationDetailTable,data: data)
-        transformationDetailTable.viewModel = heroDetailTableViewModel
+        transformationDetailTable.viewModel = TransformationDetailTableViewModel(viewController: transformationDetailTable,data: data)
         DispatchQueue.main.async {
             self.pushViewController(
                 transformationDetailTable,

@@ -9,9 +9,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 return
             }
             let window = UIWindow(windowScene: scene)
-            let loginViewController = Login()
-            loginViewController.viewModel = LoginViewModel(viewController: loginViewController)
-            let navigationController = UINavigationController(rootViewController: loginViewController)
+            let splashViewController = Splash()
+            let splashViewModel = SpashViewModel(viewController: splashViewController)
+            splashViewController.viewModel = splashViewModel
+            let navigationController = UINavigationController(rootViewController: splashViewController)
             window.rootViewController = navigationController
             window.makeKeyAndVisible()
             self.window = window

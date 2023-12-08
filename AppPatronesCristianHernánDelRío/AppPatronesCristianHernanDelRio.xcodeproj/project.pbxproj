@@ -13,6 +13,9 @@
 		F140A9182B2167C3002073A6 /* TransformationsTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F140A9172B2167C3002073A6 /* TransformationsTableViewModel.swift */; };
 		F140A91A2B217AA4002073A6 /* TransformationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F140A9192B217AA4002073A6 /* TransformationDetail.swift */; };
 		F140A91C2B217EF4002073A6 /* TransformationDetailTableModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F140A91B2B217EF4002073A6 /* TransformationDetailTableModelView.swift */; };
+		F140A9262B2291D2002073A6 /* Splash.swift in Sources */ = {isa = PBXBuildFile; fileRef = F140A9242B2291D2002073A6 /* Splash.swift */; };
+		F140A9272B2291D2002073A6 /* Splash.xib in Resources */ = {isa = PBXBuildFile; fileRef = F140A9252B2291D2002073A6 /* Splash.xib */; };
+		F140A9292B229264002073A6 /* SpashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F140A9282B229264002073A6 /* SpashViewModel.swift */; };
 		F16870FD2AD633A40032BB4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16870FC2AD633A40032BB4B /* AppDelegate.swift */; };
 		F16870FF2AD633A40032BB4B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16870FE2AD633A40032BB4B /* SceneDelegate.swift */; };
 		F16871062AD633A60032BB4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F16871052AD633A60032BB4B /* Assets.xcassets */; };
@@ -45,6 +48,9 @@
 		F140A9172B2167C3002073A6 /* TransformationsTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformationsTableViewModel.swift; sourceTree = "<group>"; };
 		F140A9192B217AA4002073A6 /* TransformationDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformationDetail.swift; sourceTree = "<group>"; };
 		F140A91B2B217EF4002073A6 /* TransformationDetailTableModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformationDetailTableModelView.swift; sourceTree = "<group>"; };
+		F140A9242B2291D2002073A6 /* Splash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splash.swift; sourceTree = "<group>"; };
+		F140A9252B2291D2002073A6 /* Splash.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Splash.xib; sourceTree = "<group>"; };
+		F140A9282B229264002073A6 /* SpashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpashViewModel.swift; sourceTree = "<group>"; };
 		F16870F92AD633A40032BB4B /* AppPatronesCristianHernanDelRio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppPatronesCristianHernanDelRio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F16870FC2AD633A40032BB4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F16870FE2AD633A40032BB4B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +89,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F140A91D2B2290FC002073A6 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				F140A91E2B22910B002073A6 /* View */,
+				F140A91F2B229111002073A6 /* ViewModel */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		F140A91E2B22910B002073A6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F140A9252B2291D2002073A6 /* Splash.xib */,
+				F140A9242B2291D2002073A6 /* Splash.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F140A91F2B229111002073A6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F140A9282B229264002073A6 /* SpashViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		F16870F02AD633A40032BB4B = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +183,7 @@
 		F19DEBCC2B1CF142008367CE /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				F140A91D2B2290FC002073A6 /* Splash */,
 				F19DEBCD2B1CF3EF008367CE /* Login */,
 				F19DEBE12B1CF5A7008367CE /* Cell */,
 				F19DEBE42B1CF5CA008367CE /* DetailCell */,
@@ -398,6 +431,7 @@
 				F16EAC4F2B0EA817009B8B66 /* TransformationDetailTable.xib in Resources */,
 				F1CCD9022AD78D9A00D40ADA /* Cell.xib in Resources */,
 				F16871092AD633A60032BB4B /* LaunchScreen.storyboard in Resources */,
+				F140A9272B2291D2002073A6 /* Splash.xib in Resources */,
 				F1CCD8FA2AD787E500D40ADA /* HeroTable.xib in Resources */,
 				F16EAC4B2B0EA7F9009B8B66 /* TransformationTable.xib in Resources */,
 				F1694F012ADE407200892A1E /* DetailCell.xib in Resources */,
@@ -425,7 +459,9 @@
 				F19DEBE82B1CF9DE008367CE /* LoginViewModel.swift in Sources */,
 				F1694F002ADE407200892A1E /* DetailCell.swift in Sources */,
 				F1CCD8F92AD787E500D40ADA /* HeroesTable.swift in Sources */,
+				F140A9292B229264002073A6 /* SpashViewModel.swift in Sources */,
 				F16871182AD634820032BB4B /* DragonBallZNetworkModel.swift in Sources */,
+				F140A9262B2291D2002073A6 /* Splash.swift in Sources */,
 				F1694EE52ADA32AA00892A1E /* Hero.swift in Sources */,
 				F140A91C2B217EF4002073A6 /* TransformationDetailTableModelView.swift in Sources */,
 				F16EAC4E2B0EA817009B8B66 /* TransformationDetailTable.swift in Sources */,
