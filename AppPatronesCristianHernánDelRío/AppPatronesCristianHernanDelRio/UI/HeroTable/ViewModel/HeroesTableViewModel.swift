@@ -16,12 +16,9 @@ final class HeroesTableViewModel{
     init(viewController: HeroesTableProtocol) {
         self.viewController = viewController
     }
-}
-
-//EXTENSION
-extension HeroesTableViewModel:HeroesTableViewModelProtocol{
-    func onViewLoaded() {
-        //creo un "DispatchGrpup" para hacer que se espere a que termine el foreach con sus tareas asincrónicas antes de ejecutarse el "DispatchQueue.main.async"
+    
+    private func getHeroesList(){
+        //creo un "DispatchGrpup" para hacer que se espere a que termine el foreach con sus tareas asincrónicas
         let group = DispatchGroup()
         group.enter()
         DragonBallZNetworkModel.getHeroesList { data in
@@ -50,6 +47,13 @@ extension HeroesTableViewModel:HeroesTableViewModelProtocol{
             }
         }
         group.wait()
+    }
+}
+
+//EXTENSION
+extension HeroesTableViewModel:HeroesTableViewModelProtocol{
+    func onViewLoaded() {
+        self.getHeroesList()
         DispatchQueue.main.async {
             self.viewController.reloadData()
         }
@@ -66,4 +70,5 @@ extension HeroesTableViewModel:HeroesTableViewModelProtocol{
     func selectRowAt(indexPatch: Int) {
         viewController.showHeroDetailTable(data: HeroDetail(id: self.data[indexPatch].id, name: self.data[indexPatch].name, description: self.data[indexPatch].description, image: self.data[indexPatch].image))
     }
+    
 }

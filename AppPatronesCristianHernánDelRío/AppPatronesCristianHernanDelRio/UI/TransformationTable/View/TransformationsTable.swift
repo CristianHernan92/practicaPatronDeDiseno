@@ -17,6 +17,10 @@ final class TransformationsTable: UITableViewController {
         viewModel?.onViewLoaded()
     }
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        1
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.viewModel?.dataCount() ?? 0
     }

@@ -4,7 +4,7 @@ import Foundation
 protocol HeroDetailTableViewModelProtocol{
     func onViewLoaded()
     func getData()->HeroDetail
-    func getTransformationsList()->[HeroTransformation]
+    func getTransformationsListData()->[HeroTransformation]
 }
 
 final class HeroDetailTableViewModel{
@@ -16,12 +16,9 @@ final class HeroDetailTableViewModel{
         self.viewController = viewController
         self.data = data
     }
-}
-
-//EXTENSION
-extension HeroDetailTableViewModel:HeroDetailTableViewModelProtocol{
-    func onViewLoaded() {
-        //creo un "DispatchGrpup" para hacer que se espere a que termine el foreach con sus tareas asincrónicas antes de ejecutarse el "DispatchQueue.main.async"
+    
+    private func getTransformationsList(){
+        //creo un "DispatchGrpup" para hacer que se espere a que termine el foreach con sus tareas asincrónicas
         let group = DispatchGroup()
         group.enter()
         DragonBallZNetworkModel.getTransformationsList(heroId: self.data.id) { [weak self] data in
@@ -31,6 +28,13 @@ extension HeroDetailTableViewModel:HeroDetailTableViewModelProtocol{
             self?.transformationsListData = data
         }
         group.wait()
+    }
+}
+
+//EXTENSION
+extension HeroDetailTableViewModel:HeroDetailTableViewModelProtocol{
+    func onViewLoaded() {
+        self.getTransformationsList()
         DispatchQueue.main.async {
             self.viewController.reloadData()
         }
@@ -40,7 +44,7 @@ extension HeroDetailTableViewModel:HeroDetailTableViewModelProtocol{
         return self.data
     }
     
-    func getTransformationsList() -> [HeroTransformation] {
+    func getTransformationsListData() -> [HeroTransformation] {
         return self.transformationsListData
     }
 }

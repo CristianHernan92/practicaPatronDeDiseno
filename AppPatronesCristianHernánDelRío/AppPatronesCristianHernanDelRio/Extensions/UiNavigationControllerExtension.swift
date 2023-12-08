@@ -2,18 +2,18 @@ import UIKit
 
 extension UINavigationController{
     func showLogin(){
+        let loginViewController = Login()
+        loginViewController.viewModel = LoginViewModel(viewController: loginViewController)
         DispatchQueue.main.async {
-            let loginViewController = Login()
-            loginViewController.viewModel = LoginViewModel(viewController: loginViewController)
             self.pushViewController(
                 loginViewController,
                 animated: true)
         }
     }
     func showHeroTable(){
+        let heroesTable = HeroesTable()
+        heroesTable.viewModel = HeroesTableViewModel(viewController: heroesTable)
         DispatchQueue.main.async {
-            let heroesTable = HeroesTable()
-            heroesTable.viewModel = HeroesTableViewModel(viewController: heroesTable)
             self.pushViewController(
                 heroesTable,
                 animated: true)

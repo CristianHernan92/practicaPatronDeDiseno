@@ -16,6 +16,10 @@ final class HeroDetailTable: UITableViewController {
         viewModel?.onViewLoaded()
     }
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        1
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -44,7 +48,7 @@ final class HeroDetailTable: UITableViewController {
             cell.titleOfCell.text = data.name
             cell.descriptionOfCell.text = data.description
             cell.imageOfCell.image = data.image
-            if (self.viewModel?.getTransformationsList() == []){
+            if (self.viewModel?.getTransformationsListData() == []){
                 if(!cell.transformationsButton.isHidden){
                     cell.transformationsButton.isHidden = true
                     cell.transformationsButton.isEnabled = false
@@ -79,10 +83,9 @@ final class HeroDetailTable: UITableViewController {
     @objc private func transformationsButtonTapped(_ sender: UIButton) {
         if let viewModel = self.viewModel{
             DispatchQueue.main.async {
-                self.navigationController?.showTransformationTable(with: viewModel.getTransformationsList())
+                self.navigationController?.showTransformationTable(with: viewModel.getTransformationsListData())
             }
         }
-        
     }
 }
 
