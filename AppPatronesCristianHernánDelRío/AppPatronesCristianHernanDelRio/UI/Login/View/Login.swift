@@ -21,10 +21,9 @@ final class Login: UIViewController {
     @IBOutlet private weak var EmailTextField: UITextField!
     @IBOutlet private weak var PasswordTextField: UITextField!
     @IBAction private func LoginButtonAction(_ sender: UIButton) {
-//        if let email = EmailTextField.text, !email.isEmpty, let password = PasswordTextField.text, !password.isEmpty{
-//                viewModel.loginButtonClicked(email: email, password: password)
-//        }
-        viewModel.buttonClicked(email: "cristianhernandelrio@gmail.com", password: "KQFhbcuj9Hwgf39")
+        if let email = EmailTextField.text, !email.isEmpty, let password = PasswordTextField.text, !password.isEmpty{
+            viewModel.buttonClicked(email: email, password: password)
+        }
     }
 }
 
