@@ -1,20 +1,29 @@
 import UIKit
 
 //PROTOCOL
-protocol HeroesTableProtocol{
+protocol HeroesTableProtocol:AnyObject{
     func reloadData()
     func showHeroDetailTable(data:HeroDetail)
 }
 
 final class HeroesTable: UITableViewController {
     //viewModel
-    var viewModel: HeroesTableViewModelProtocol? = nil
+    private let viewModel: HeroesTableViewModelProtocol
+    
+    init(viewModel: HeroesTableViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCell()
         configurations()
-        viewModel?.onViewLoaded()
+        viewModel.onViewLoaded()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -22,20 +31,19 @@ final class HeroesTable: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.dataCount() ?? 0
+        return viewModel.dataCount
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = prepareAndReturnCell(indexPath: indexPath)
-        return cell
+        return prepareAndReturnCell(viewModel: viewModel, indexPath: indexPath)
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.selectRowAt(indexPatch: indexPath.row)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return height()
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel?.selectRowAt(indexPatch: indexPath.row)
     }
     
     private func registerCell(){
@@ -52,17 +60,12 @@ final class HeroesTable: UITableViewController {
         return 125.0
     }
     
-    private func prepareAndReturnCell(indexPath: IndexPath) -> UITableViewCell{
+    private func prepareAndReturnCell(viewModel: HeroesTableViewModelProtocol,indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! Cell
-        if let data = viewModel?.getCellData(indexPatch: indexPath.row){
-            cell.titleOfCell.text = data.name
-            cell.descriptionOfCell.text = data.description
-            cell.imageOfCell.image = data.image
-        }else{
-            cell.titleOfCell.text = ""
-            cell.descriptionOfCell.text = ""
-            cell.imageOfCell.image = UIImage()
-        }
+        let data = viewModel.elementData(indexPatch: indexPath.row)
+        cell.titleOfCell.text = data.name
+        cell.descriptionOfCell.text = data.description
+        cell.imageOfCell.image = viewModel.elementDataImage(indexPatch: indexPath.row)
         return cell
     }
 }
@@ -70,11 +73,20 @@ final class HeroesTable: UITableViewController {
 //EXTENSION
 extension HeroesTable:HeroesTableProtocol{
     func reloadData() {
-        self.tableView.reloadData()
-    }
-    func showHeroDetailTable(data:HeroDetail){
         DispatchQueue.main.async {
-            self.navigationController?.showHeroDetailTable(with: data)
+            self.tableView.reloadData()
         }
     }
+    func showHeroDetailTable(data:HeroDetail){
+        let heroDetailTable = HeroDetailTable()
+        let viewModel = HeroDetailTableViewModel(viewController: heroDetailTable, data: data)
+        heroDetailTable.viewModel = viewModel
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(
+                heroDetailTable,
+                animated: true
+            )
+        }
+    }
+
 }

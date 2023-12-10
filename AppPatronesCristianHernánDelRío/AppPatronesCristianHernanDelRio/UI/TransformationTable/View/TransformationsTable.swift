@@ -1,7 +1,7 @@
 import UIKit
 
 //PROTOCOL
-protocol TransformationsTableProtocol{
+protocol TransformationsTableProtocol:AnyObject{
     func reloadData()
     func showTransformationDetailTable(data: TransformationDetail)
 }
@@ -14,28 +14,36 @@ final class TransformationsTable: UITableViewController {
         super.viewDidLoad()
         registerCell()
         configurations()
-        viewModel?.onViewLoaded()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        1
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel?.dataCount() ?? 0
+        if let viewModel{
+            return viewModel.dataCount
+        }else{
+            return 0
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = prepareAndReturnCell(indexPath: indexPath)
-        return cell
+        if let viewModel{
+            return prepareAndReturnCell(viewModel: viewModel,indexPath: indexPath)
+        }else{
+            return UITableViewCell()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let viewModel{
+            viewModel.selectRowAt(indexPatch: indexPath.row)
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return height()
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel?.selectRowAt(indexPatch: indexPath.row)
     }
     
     private func registerCell(){
@@ -47,18 +55,12 @@ final class TransformationsTable: UITableViewController {
         navigationItem.title = "Transformations"
     }
     
-    private func prepareAndReturnCell(indexPath: IndexPath) -> UITableViewCell{
+    private func prepareAndReturnCell(viewModel: TransformationsTableViewModelProtocol, indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! Cell
-        if let data = self.viewModel?.getCellData(indexPatch: indexPath.row){
-            cell.titleOfCell.text = data.name
-            cell.descriptionOfCell.text = data.description
-            cell.imageOfCell.image = data.image
-        }
-        else{
-            cell.titleOfCell.text = ""
-            cell.descriptionOfCell.text = ""
-            cell.imageOfCell.image = UIImage()
-        }
+        let data = viewModel.elementData(indexPatch: indexPath.row)
+        cell.titleOfCell.text = data.name
+        cell.descriptionOfCell.text = data.description
+        cell.imageOfCell.image = viewModel.elementDataImage(indexPatch: indexPath.row)
         return cell
     }
     
@@ -70,11 +72,19 @@ final class TransformationsTable: UITableViewController {
 //EXTENSION
 extension TransformationsTable:TransformationsTableProtocol{
     func reloadData() {
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     func showTransformationDetailTable(data: TransformationDetail){
         DispatchQueue.main.async {
-            self.navigationController?.showTransformationDetailTable(with: data)
+            let transformationDetailTable = TransformationDetailTable()
+            let viewModel = TransformationDetailTableViewModel(viewController: transformationDetailTable,data: data)
+            transformationDetailTable.viewModel = viewModel
+            self.navigationController?.pushViewController(
+                transformationDetailTable,
+                animated: true
+            )
         }
     }
 }

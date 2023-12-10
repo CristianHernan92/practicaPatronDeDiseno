@@ -9,9 +9,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 return
             }
             let window = UIWindow(windowScene: scene)
-            let splashViewController = Splash()
-            let splashViewModel = SpashViewModel(viewController: splashViewController)
-            splashViewController.viewModel = splashViewModel
+            let viewModel = SpashViewModel()
+            let splashViewController = Splash(viewModel: viewModel)
+            viewModel.viewController = splashViewController
             let navigationController = UINavigationController(rootViewController: splashViewController)
             window.rootViewController = navigationController
             window.makeKeyAndVisible()

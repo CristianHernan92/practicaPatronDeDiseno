@@ -1,7 +1,7 @@
 import UIKit
 
 //PROTOCOL
-protocol TransformationDetailTableProtocol{
+protocol TransformationDetailTableProtocol:AnyObject{
     func reloadData()
 }
 
@@ -17,7 +17,7 @@ final class TransformationDetailTable: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        1
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -25,8 +25,11 @@ final class TransformationDetailTable: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = prepareAndReturnCell(indexPath: indexPath)
-        return cell
+        if let viewModel{
+            return prepareAndReturnCell(viewModel: viewModel, indexPath: indexPath)
+        }else{
+            return UITableViewCell()
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -39,21 +42,17 @@ final class TransformationDetailTable: UITableViewController {
     }
     
     private func configurations(){
-        navigationItem.title = viewModel?.getData().name
+        if let viewModel{
+            navigationItem.title = viewModel.elementData.name
+        }
     }
     
-    private func prepareAndReturnCell(indexPath: IndexPath) -> UITableViewCell{
+    private func prepareAndReturnCell(viewModel: TransformationDetailTableViewModelProtocol, indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailCell
-        if let data = self.viewModel?.getData(){
-            cell.titleOfCell.text = data.name
-            cell.descriptionOfCell.text = data.description
-            cell.imageOfCell.image = data.image
-        }
-        else{
-            cell.titleOfCell.text = ""
-            cell.descriptionOfCell.text = ""
-            cell.imageOfCell.image = UIImage()
-        }
+        let data = viewModel.elementData
+        cell.titleOfCell.text = data.name
+        cell.descriptionOfCell.text = data.description
+        cell.imageOfCell.image = data.image
         cell.transformationsButton.isHidden = true
         cell.transformationsButton.isEnabled = false
         return cell
@@ -68,6 +67,8 @@ final class TransformationDetailTable: UITableViewController {
 //EXTENSION
 extension TransformationDetailTable:TransformationDetailTableProtocol{
     func reloadData() {
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }

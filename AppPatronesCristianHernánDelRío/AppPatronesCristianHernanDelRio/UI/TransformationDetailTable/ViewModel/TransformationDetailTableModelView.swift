@@ -3,12 +3,12 @@ import Foundation
 //PROTOCOL
 protocol TransformationDetailTableViewModelProtocol{
     func onViewLoaded()
-    func getData()->TransformationDetail
+    var elementData:TransformationDetail { get }
 }
 
 final class TransformationDetailTableViewModel{
     //viewController
-    private let viewController:TransformationDetailTableProtocol
+    weak var viewController:TransformationDetailTableProtocol?
     private let data:TransformationDetail
     
     init(viewController:TransformationDetailTableProtocol,data: TransformationDetail) {
@@ -20,11 +20,9 @@ final class TransformationDetailTableViewModel{
 //EXTENSION
 extension TransformationDetailTableViewModel:TransformationDetailTableViewModelProtocol{
     func onViewLoaded() {
-        DispatchQueue.main.async {
-            self.viewController.reloadData()
-        }
+        self.viewController?.reloadData()
     }
-    func getData()->TransformationDetail{
+    var elementData:TransformationDetail{
         return self.data
     }
 }

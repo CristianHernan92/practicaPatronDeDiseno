@@ -1,7 +1,7 @@
 import UIKit
 
 //PROTOCOL
-protocol HeroDetailTableProtocol{
+protocol HeroDetailTableProtocol:AnyObject{
     func reloadData()
 }
 
@@ -17,7 +17,7 @@ final class HeroDetailTable: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        1
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -25,8 +25,11 @@ final class HeroDetailTable: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = prepareAndReturnCell(indexPath: indexPath)
-        return cell
+        if let viewModel{
+            return prepareAndReturnCell(viewModel: viewModel,indexPath: indexPath)
+        }else{
+            return UITableViewCell()
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -39,39 +42,33 @@ final class HeroDetailTable: UITableViewController {
     }
     
     private func configurations(){
-        navigationItem.title = viewModel?.getData().name
+        if let viewModel {
+            navigationItem.title = viewModel.elementData.name
+        }
     }
     
-    private func prepareAndReturnCell(indexPath: IndexPath) -> UITableViewCell{
+    private func prepareAndReturnCell(viewModel: HeroDetailTableViewModelProtocol, indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailCell
-        if let data = self.viewModel?.getData(){
-            cell.titleOfCell.text = data.name
-            cell.descriptionOfCell.text = data.description
-            cell.imageOfCell.image = data.image
-            if (self.viewModel?.getTransformationsListData() == []){
-                if(!cell.transformationsButton.isHidden){
-                    cell.transformationsButton.isHidden = true
-                    cell.transformationsButton.isEnabled = false
-                }
-            }else{
-                if(cell.transformationsButton.isHidden){
-                    cell.transformationsButton.isHidden = false
-                    cell.transformationsButton.isEnabled = true
-                }
-                //agregamos la función para el evento "touchUpInside" del botón "transformationsButton" de la celda
-                cell.transformationsButton.addTarget(
-                                self,
-                                action: #selector(self.transformationsButtonTapped(_:)),
-                                for: .touchUpInside
-                )
+        let data = viewModel.elementData
+        cell.titleOfCell.text = data.name
+        cell.descriptionOfCell.text = data.description
+        cell.imageOfCell.image = data.image
+        if (viewModel.listData == []){
+            if(!cell.transformationsButton.isHidden){
+                cell.transformationsButton.isHidden = true
+                cell.transformationsButton.isEnabled = false
             }
-        }
-        else{
-            cell.titleOfCell.text = ""
-            cell.descriptionOfCell.text = ""
-            cell.imageOfCell.image = UIImage()
-            cell.transformationsButton.isHidden = true
-            cell.transformationsButton.isEnabled = false
+        }else{
+            if(cell.transformationsButton.isHidden){
+                cell.transformationsButton.isHidden = false
+                cell.transformationsButton.isEnabled = true
+            }
+            //agregamos la función para el evento "touchUpInside" del botón "transformationsButton" de la celda
+            cell.transformationsButton.addTarget(
+                            self,
+                            action: #selector(self.transformationsButtonTapped(_:)),
+                            for: .touchUpInside
+            )
         }
         return cell
     }
@@ -81,9 +78,15 @@ final class HeroDetailTable: UITableViewController {
     }
     
     @objc private func transformationsButtonTapped(_ sender: UIButton) {
-        if let viewModel = self.viewModel{
-            DispatchQueue.main.async {
-                self.navigationController?.showTransformationTable(with: viewModel.getTransformationsListData())
+        DispatchQueue.main.async {
+            if let viewModel = self.viewModel {
+                let transformationsTable = TransformationsTable()
+                let viewModel = TransformationsTableViewModel(viewController: transformationsTable, data: viewModel.listData)
+                transformationsTable.viewModel = viewModel
+                self.navigationController?.pushViewController(
+                    transformationsTable,
+                    animated: true
+                )
             }
         }
     }
@@ -92,6 +95,8 @@ final class HeroDetailTable: UITableViewController {
 //EXTENSION
 extension HeroDetailTable:HeroDetailTableProtocol{
     func reloadData() {
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }

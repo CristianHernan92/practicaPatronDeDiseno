@@ -8,26 +8,19 @@ protocol SpashViewModelProtocol{
 
 final class SpashViewModel{
     //viewController
-    var viewController: SplashProtocol
-    
-    init(viewController: SplashProtocol) {
-        self.viewController = viewController
-    }
-    
+    weak var viewController: SplashProtocol? = nil
 }
 
 //EXTENSION
 extension SpashViewModel: SpashViewModelProtocol{
     func viewDidAppear() {
-        self.viewController.startAnimatingOfActivityIndicator()
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)){ [weak self] in
-            self?.viewController.showLogin()
+        viewController?.startAnimatingOfActivityIndicator()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)){
+            self.viewController?.showLogin()
         }
     }
     
     func viewDidDisappear() {
-        self.viewController.stopAnimatingOfActivityIndicator()
+            viewController?.stopAnimatingOfActivityIndicator()
     }
-    
-    
 }

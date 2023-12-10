@@ -2,16 +2,12 @@ import Foundation
 
 //PROTOCOL
 protocol LoginViewModelProtocol{
-    func loginButtonClicked(email: String, password: String)
+    func buttonClicked(email: String, password: String)
 }
 
 final class LoginViewModel{
     //viewController
-    private let viewController: LoginMethodsProtocol
-    
-    init(viewController: LoginMethodsProtocol) {
-        self.viewController = viewController
-    }
+    weak var viewController: LoginMethodsProtocol? = nil
     
     //login
     //llamada a la api del login
@@ -20,14 +16,13 @@ final class LoginViewModel{
             completion()
         }
     }
-
 }
 
 //EXTENSION
 extension LoginViewModel:LoginViewModelProtocol{
-    func loginButtonClicked(email: String, password: String) {
+    func buttonClicked(email: String, password: String) {
             self.login(email: email, password: password) {
-                self.viewController.pushHeroTable()
+                self.viewController?.pushHeroTable()
             }
     }
 }
